@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMuslim - Portal Islam Harian</title>
+    <style>
+        :root {
+            --primary-color: #0d5c3d;
+            --secondary-color: #148f5a;
+            --light-bg: #f4f9f6;
+            --text-color: #333333;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigasi */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #a8e6cf;
+        }
+
+        /* Konten Utama */
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section {
+            display: none;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Sub-navigasi di dalam Menu */
+        .sub-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .sub-btn {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .sub-btn:hover, .sub-btn.active-sub {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .sub-content {
+            display: none;
+        }
+
+        .sub-content.active-sub-content {
+            display: block;
+        }
+
+        /* Kartu Artikel & Daftar */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        ul.list-style {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        ul.list-style li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #222;
+            color: var(--white);
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">iMuslim</div>
+        <nav>
+            <ul>
+                <li><a onclick="switchTab('beranda')" class="nav-link active" id="link-beranda">Beranda</a></li>
+                <li><a onclick="switchTab('artikel')" class="nav-link" id="link-artikel">Artikel Muslim</a></li>
+                <li><a onclick="switchTab('sholat')" class="nav-link" id="link-sholat">Sifat Sholat Nabi</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- 1. BERANDA -->
+        <div id="beranda" class="section active">
+            <h1>Selamat Datang di iMuslim</h1>
+            <p>Portal edukasi Islam harian untuk membantu memperdalam pemahaman agama, panduan ibadah sesuai sunnah, serta artikel islami pilihan.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Artikel Muslim Pilihan</h3>
+                    <p>Baca berbagai artikel inspiratif seputar fiqih, akidah, dan akhlak sehari-hari.</p>
+                </div>
+                <div class="card">
+                    <h3>Panduan Sholat</h3>
+                    <p>Pelajari tata cara sholat Nabi Muhammad SAW lengkap dari takbir hingga salam beserta dzikirnya.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. ARTIKEL MUSLIM -->
+        <div id="artikel" class="section">
+            <h1>Artikel Muslim</h1>
+            <div class="sub-nav">
+                <button class="sub-btn active-sub" onclick="switchSub('artikel', 'art-1')">Keutamaan Sholat Berjamaah</button>
+                <button class="sub-btn" onclick="switchSub('artikel', 'art-2')">Adab Menuntut Ilmu</button>
+                <button class="sub-btn" onclick="switchSub('artikel', 'art-3')">Pentingnya Kejujuran</button>
+            </div>
+
+            <div id="art-1" class="sub-content active-sub-content">
+                <h3>Keutamaan Sholat Berjamaah di Masjid</h3>
+                <p>Sholat berjamaah memiliki keutamaan yang sangat besar dibandingkan sholat sendirian (munfarid), yaitu dilipatgandakan pahalanya sebanyak 27 derajat.</p>
+                <p>Selain pahala yang berlipat, sholat berjamaah juga menjadi sarana mempererat tali silaturahmi antar tetangga dan kaum muslimin di lingkungan sekitar.</p>
+            </div>
+            <div id="art-2" class="sub-content">
+                <h3>Adab Menuntut Ilmu dalam Islam</h3>
+                <p>Seorang penuntut ilmu hendaknya menghiasi dirinya dengan adab dan akhlak yang mulia, seperti ikhlas karena Allah SWT, tawadhu' kepada guru, serta mengamalkan ilmu yang telah di dapat.</p>
+            </div>
+            <div id="art-3" class="sub-content">
+                <h3>Pentingnya Kejujuran dalam Keseharian</h3>
+                <p>Kejujuran adalah sifat utama seorang mukmin. Kejujuran akan membimbing kepada kebaikan, dan kebaikan akan menuntun pelakunya menuju surga.</p>
+            </div>
+        </div>
+
+        <!-- 3. SIFAT SHOLAT NABI -->
+        <div id="sholat" class="section">
+            <h1>Sifat Sholat Nabi Muhammad SAW</h1>
+            <div class="sub-nav">
+                <button class="sub-btn active-sub" onclick="switchSub('sholat', 'sh-1')">Cara Sholat Nabi</button>
+                <button class="sub-btn" onclick="switchSub('sholat', 'sh-2')">Bacaan Sholat Sesuai Sunnah</button>
+                <button class="sub-btn" onclick="switchSub('sholat', 'sh-3')">12 Doa Iftitah</button>
+                <button class="sub-btn" onclick="switchSub('sholat', 'sh-4')">Dzikir Setelah Sholat</button>
+            </div>
+
+            <div id="sh-1" class="sub-content active-sub-content">
+                <h3>Tata Cara Sholat Nabi</h3>
+                <p>1. Berdiri tegak menghadap kiblat, lalu bertakbir (Takbiratul Ihram) sambil mengangkat tangan sejajar dengan pundak atau telinga.</p>
+                <p>2. Bersedekap (meletakkan tangan kanan di atas punggung tangan kiri, pergelangan, atau lengan) di atas dada.</p>
+                <p>3. Membaca doa Iftitah, lalu surat Al-Fatihah dan surat pendek.</p>
+                <p>4. Ruku' dengan tuma'ninah, iktidal, sujud dua kali dengan dipisahkan duduk di antara dua sujud, hingga salam.</p>
+            </div>
+
+            <div id="sh-2" class="sub-content">
+                <h3>Bacaan Sholat Sesuai Sunnah</h3>
+                <p><strong>Ruku':</strong> <em>Subhaana robbiyal 'azhiimi wa bihamdih</em> (dibaca 3x)</p>
+                <p><strong>Iktidal:</strong> <em>Sami'allahu liman hamidah, robbanaa wa lakal hamdu</em></p>
+                <p><strong>Sujud:</strong> <em>Subhaana robbiyal a'laa wa bihamdih</em> (dibaca 3x)</p>
+                <p><strong>Duduk di antara dua sujud:</strong> <em>Robbighfirlii warhamnii wajburnii warfa'nii warzuqnii wahdinii wa 'aafinii wa'fu 'annii</em></p>
+            </div>
+
+            <div id="sh-3" class="sub-content">
+                <h3>12 Macam Do'a Iftitah</h3>
+                <p>Berikut adalah beberapa variasi doa iftitah shahih yang diajarkan Nabi SAW:</p>
+                <ul class="list-style">
+                    <li>1. Doa Iftitah "Wajjahtu wajhiya..." (HR. Muslim)</li>
+                    <li>2. Doa Iftitah "Allaahumma baa'id bainii..." (HR. Bukhari & Muslim)</li>
+                    <li>3. Doa Iftitah "Allaahumma antal maliku..." (HR. Muslim)</li>
+                    <li>4. Doa Iftitah "Alhamdulillahi hamdan katsiran..." (HR. Muslim)</li>
+                    <li>5. Doa Iftitah "Allaahumma khalaqta nii..." (HR. Muslim)</li>
+                    <li>6. Doa Iftitah sholat malam (Tahajud) "Allaahumma robba jibraaila..." (HR. Muslim)</li>
+                    <li>7. Doa Iftitah "Subhaanaka allahumma wa bihamdika..." (HR. Abu Dawud)</li>
+                    <li>8. Doa Iftitah "Allahu akbar kabira..." (HR. Muslim dari Ibnu Umar)</li>
+                    <li>9. Doa Iftitah riwayat Ali bin Abi Thalib (HR. Muslim)</li>
+                    <li>10. Doa Iftitah riwayat Umar bin Khattab (Muwatha' Malik)</li>
+                    <li>11. Doa Iftitah ringkas dari sahabat Anas bin Malik</li>
+                    <li>12. Doa Iftitah khusus saat memulai sholat sunnah mutlak.</li>
+                </ul>
+            </div>
+
+            <div id="sh-4" class="sub-content">
+                <h3>Dzikir Setelah Sholat Fardhu</h3>
+                <p>1. Membaca Istighfar 3x: <em>Astaghfirullah</em></p>
+                <p>2. <em>Allahumma antassalam wa minkassalam, tabaarokta yaa dzal jalaali wal ikrom.</em></p>
+                <p>3. Membaca Tasbih (33x), Tahmid (33x), dan Takbir (33x), lalu disempurnakan menjadi 100 dengan membaca tahlil.</p>
+                <p>4. Membaca Ayat Kursi (QS. Al-Baqarah: 255).</p>
+                <p>5. Membaca Surat Al-Ikhlas, Al-Falaq, dan An-Nas setelah setiap selesai sholat.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 iMuslim. Semua Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script>
+        // Fungsi untuk berpindah menu utama (Beranda, Artikel, Sifat Sholat)
+        function switchTab(tabId) {
+            // Sembunyikan semua section utama
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Hapus kelas aktif dari semua nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // Tampilkan section yang dipilih dan aktifkan tombolnya
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('link-' + tabId).classList.add('active');
+        }
+
+        // Fungsi untuk berpindah sub-navigasi di dalam menu Artikel / Sifat Sholat
+        function switchSub(parentId, subId) {
+            const parentContainer = document.getElementById(parentId);
+            
+            // Sembunyikan semua sub-content di dalam parent tersebut
+            const subContents = parentContainer.querySelectorAll('.sub-content');
+            subContents.forEach(sc => sc.classList.remove('active-sub-content'));
+
+            // Hilangkan status aktif dari tombol sub-nav terkait
+            const subBtns = parentContainer.querySelectorAll('.sub-btn');
+            subBtns.forEach(btn => btn.classList.remove('active-sub'));
+
+            // Tampilkan sub-konten yang diklik
+            document.getElementById(subId).classList.add('active-sub-content');
+            
+            // Berikan kelas aktif pada tombol yang sedang ditekan
+            event.currentTarget.classList.add('active-sub');
+        }
+    </script>
+</body>
+</html>
